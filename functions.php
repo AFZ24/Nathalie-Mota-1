@@ -22,3 +22,16 @@ endif;
 add_action( 'wp_enqueue_scripts', 'child_theme_configurator_css', 10 );
 
 // END ENQUEUE PARENT ACTION
+
+function register_my_menu() {
+    register_nav_menu( 'main-menu', __( 'Menu principal', 'text-domain' ) );
+}
+add_action( 'after_setup_theme', 'register_my_menu' );
+
+require_once get_stylesheet_directory() . '/menus.php';
+
+function enqueue_menus_js() {
+    wp_enqueue_script( 'menus-script', get_stylesheet_directory_uri() . '/js/menus.js', array(), null, true );
+}
+
+add_action( 'wp_enqueue_scripts', 'enqueue_menus_js' );
