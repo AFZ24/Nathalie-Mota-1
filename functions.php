@@ -23,3 +23,4 @@ function mon_theme_enqueue_scripts() {
     );
 }
 add_action('wp_enqueue_scripts', 'mon_theme_enqueue_scripts');
+
