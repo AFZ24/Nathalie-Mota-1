@@ -104,3 +104,26 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner {
     background: rgba(0, 0, 0, 0.5);
     z-index: 999; /* Sous la modale mais au-dessus du reste */
 }
+
+ul#footer-menu {
+    list-style-type: none;
+    display: flex;
+    gap: 50px;
+    font-family: Space Mono;
+}
+
+nav.navbar.footer-navbar {
+    display: flex;
+    justify-content: center;
+    border-top: solid 1px;
+    align-items: center;
+    height: 40px;
+}
+input.wpcf7-form-control.wpcf7-submit.has-spinner {
+    display: flex;
+    margin: auto;
+    font-family: 'Space Mono';
+    width: -webkit-fill-available;
+    height: 45px;
+    border-radius: 5px;
+}

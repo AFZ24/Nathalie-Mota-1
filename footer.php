@@ -34,3 +34,18 @@
         }
     });
 </script>
+<nav class="navbar footer-navbar" role="navigation" aria-label="<?php esc_html_e( 'Menu du footer', 'text-domain' ); ?>">
+    <?php
+    if (has_nav_menu('footer-menu')) {
+        wp_nav_menu([
+            'theme_location' => 'footer-menu',
+            'container'      => false,
+            'menu_id'        => 'footer-menu',
+            'menu_class'     => 'footer-menu',
+        ]);
+    } else {
+        echo '<p>' . esc_html__('Aucun menu n\'est défini pour cet emplacement de footer.', 'text-domain') . '</p>';
+    }
+    ?>
+    <ul id="footer-menu"><p>TOUS DROITS RESERVES</p></ul>
+</nav>

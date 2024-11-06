@@ -12,6 +12,15 @@ function register_my_menu() {
 }
 add_action('after_setup_theme', 'register_my_menu');
 
+// Enregistrer le menu du footer
+function nathaliemota_register_menus() {
+    register_nav_menus([
+        'footer-menu' => __( 'Menu du footer', 'text-domain' ),
+    ]);
+}
+add_action('after_setup_theme', 'nathaliemota_register_menus');
+
+
 // Enqueue le fichier JavaScript si nécessaire
 function mon_theme_enqueue_scripts() {
     wp_enqueue_script(
