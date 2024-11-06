@@ -1,0 +1,107 @@
+/*
+Theme Name: nathaliemota
+Author: Afaf
+Description: Projet Openclassroom
+*/
+.space-mono-regular {
+    font-family: "Space Mono", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .space-mono-bold {
+    font-family: "Space Mono", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .space-mono-regular-italic {
+    font-family: "Space Mono", serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  .space-mono-bold-italic {
+    font-family: "Space Mono", serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul#primary-menu {
+    list-style-type: none;
+    display: flex;
+    gap: 50px;
+    font-family: Space Mono;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.banniere {
+        width: -webkit-fill-available;
+}
+
+.contact-img {
+    height: 115px;
+    margin-left: -20px;
+}
+
+.formulaire {
+    display: flex;
+    justify-content: center;
+    font-family: Space Mono;
+    list-style-type: none;
+
+}
+input.wpcf7-form-control.wpcf7-text {
+    border-radius: 8px;
+    height: 50px;
+    border-color: black;
+}
+textarea.wpcf7-form-control.wpcf7-textarea {
+    border-radius: 8px;
+    height: 260px;
+    border-color: black;
+    width: 340px;
+}
+
+input.wpcf7-form-control.wpcf7-submit.has-spinner {
+    display: flex;
+    margin: auto;
+}
+
+#myModal {
+    display: none; /* Masque la modale */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: solid 5px black;
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Place la modale au-dessus de tout le reste */
+}
+
+/* Overlay pour foncer l'arrière-plan lorsque la modale est ouverte */
+#myModalOverlay {
+    display: none; /* Masque l'overlay par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999; /* Sous la modale mais au-dessus du reste */
+}
+
