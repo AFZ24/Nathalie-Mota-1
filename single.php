@@ -1,49 +1,55 @@
-<!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
+<?php
+get_header(); // Inclus l'en-tête de votre site
 
-<!-- wp:group {"tagName":"main","align":"full"} -->
-<main class="wp-block-group alignfull">
-	<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|50"},"margin":{"bottom":"var:preset|spacing|40"}}},"layout":{"type":"constrained"}} -->
-	<div class="wp-block-group"
-		style="margin-bottom:var(--wp--preset--spacing--40);padding-top:var(--wp--preset--spacing--50)">
-		<!-- wp:post-featured-image {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|40"}}}} /-->
+if (have_posts()) : while (have_posts()) : the_post();
 
-		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10","padding":{"top":"0","bottom":"0"}}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->
-		<div class="wp-block-group" style="padding-top:0;padding-bottom:0">
-			<!-- wp:post-title {"level":1,"fontSize":"x-large"} /-->
+    if (get_post_type() == 'photos') : ?>
+        
+        <!-- Affiche l'image de la photo avant le titre -->
+       <?php if (get_field('photo')) : ?>
+            <div class="image">
+                <img class="photo-image" src="<?php echo esc_url(get_field('photo')); ?>" alt="<?php the_title(); ?>">
+            </div> 
+        <?php endif; ?>
 
-			<!-- wp:template-part {"slug":"post-meta"} /-->
-		</div>
-		<!-- /wp:group -->
-	</div>
-	<!-- /wp:group -->
+        <div class="photos-item">
+            <h1><?php the_title(); ?></h1>
 
-	<!-- wp:post-content {"lock":{"move":false,"remove":true},"align":"full","layout":{"type":"constrained"}} /-->
+            <div class="photos-content">
+                <!-- Affiche la référence de la photo -->
+                <?php if (get_field('reference')) : ?>
+                    <p><strong>Référence :</strong> <?php echo esc_html(get_field('reference')); ?></p>
+                <?php endif; ?>
 
-	<!-- wp:group {"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"},"padding":{"bottom":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->
-	<div class="wp-block-group"
-		style="margin-top:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--50)">
-		<!-- wp:post-terms {"term":"post_tag","separator":"  ","className":"is-style-pill"} /-->
+                <!-- Affiche les taxonomies Catégorie et Format -->
+                <p><strong>Catégorie :</strong> <?php the_terms(get_the_ID(), 'categorie'); ?></p>
+                <p><strong>Format :</strong> <?php the_terms(get_the_ID(), 'format'); ?></p>
 
-		<!-- wp:group {"layout":{"type":"constrained"}} -->
-		<div class="wp-block-group">
-			<!-- wp:spacer {"height":"var:preset|spacing|40"} -->
-			<div style="height:var(--wp--preset--spacing--40)" aria-hidden="true" class="wp-block-spacer">
-			</div>
-			<!-- /wp:spacer -->
+                <!-- Affiche le type -->
+                <?php if (get_field('type')) : ?>
+                    <p><strong>Type :</strong> <?php echo esc_html(get_field('type')); ?></p>
+                <?php endif; ?>
+				<?php if (get_field('annee')) : ?>
+                    <p><strong>Année :</strong> <?php echo esc_html(get_field('annee')); ?></p>
+                <?php endif; ?>
+                <!-- Affiche le contenu de la publication -->
+                <?php the_content(); ?>
+            </div>
+        </div>
 
-			<!-- wp:separator {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|40"}}},"backgroundColor":"contrast-3","className":"is-style-wide"} -->
-			<hr class="wp-block-separator has-text-color has-contrast-3-color has-alpha-channel-opacity has-contrast-3-background-color has-background is-style-wide" style="margin-bottom:var(--wp--preset--spacing--40)"/>
-			<!-- /wp:separator -->
+    <?php else : // Pour les autres types de publication ?>
 
-			<!-- wp:pattern {"slug":"twentytwentyfour/hidden-comments"} /-->
+        <div class="post-item">
+            <h1><?php the_title(); ?></h1>
+            <div class="post-content">
+                <?php the_content(); ?>
+            </div>
+        </div>
 
-			<!-- wp:pattern {"slug":"twentytwentyfour/hidden-post-navigation"} /-->
+    <?php endif;
 
-		</div>
-		<!-- /wp:group -->
-	</div>
-	<!-- /wp:group -->
-</main>
-<!-- /wp:group -->
+endwhile;
+endif;
 
-<!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
+get_footer(); // Inclus le pied de page
+?>

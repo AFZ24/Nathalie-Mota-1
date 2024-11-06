@@ -33,3 +33,27 @@ function mon_theme_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'mon_theme_enqueue_scripts');
 
+function create_custom_taxonomies() {
+    // Taxonomie 'categorie'
+    register_taxonomy('categorie', 'photos', array(
+        'hierarchical' => true,
+        'label' => 'Catégories',
+        'singular_label' => 'Catégorie',
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'categorie'),
+    ));
+
+    // Taxonomie 'format'
+    register_taxonomy('format', 'photos', array(
+        'hierarchical' => true,
+        'label' => 'Formats',
+        'singular_label' => 'Format',
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'format'),
+    ));
+}
+add_action('init', 'create_custom_taxonomies');

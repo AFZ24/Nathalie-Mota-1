@@ -29,9 +29,4 @@
 </nav>
 </header>
 
-<body>
-<div> <img class="banniere" src="http://nathalie-mota1.local/wp-content/uploads/2024/10/Header-1.png" alt="image photographe event">
-</div>
-
-</body>
 

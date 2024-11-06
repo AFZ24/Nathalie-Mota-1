@@ -3,6 +3,8 @@ Theme Name: nathaliemota
 Author: Afaf
 Description: Projet Openclassroom
 */
+
+
 .space-mono-regular {
     font-family: "Space Mono", serif;
     font-weight: 400;
@@ -126,4 +128,14 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner {
     width: -webkit-fill-available;
     height: 45px;
     border-radius: 5px;
+}
+
+
+img.photo-image {
+    height: 560px;
+}
+
+.image {
+    display: flex;
+    justify-content: flex-end;
 }
