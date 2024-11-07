@@ -1,12 +1,15 @@
-
+<div class="container">
 <?php
 get_header();
 ?>
+</div>
 <body>
 <div> <img class="banniere" src="http://nathalie-mota1.local/wp-content/uploads/2024/10/Header-1.png" alt="image photographe event">
 </div>
 
-</body>
+<div class="container">
+
+
 <main id="main-content" role="main">
     <?php if ( have_posts() ) : ?>
         <?php while ( have_posts() ) : the_post(); ?>
@@ -37,7 +40,8 @@ get_header();
         </article>
     <?php endif; ?>
 </main>
-
+</body>
+</div>
 <?php
 get_footer();
 ?>

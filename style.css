@@ -4,6 +4,9 @@ Author: Afaf
 Description: Projet Openclassroom
 */
 
+img {
+    width: 300px;
+}
 
 .space-mono-regular {
     font-family: "Space Mono", serif;
@@ -35,11 +38,22 @@ header {
     align-items: center;
 }
 
+.container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 0 20px;
+}
+
 ul#primary-menu {
     list-style-type: none;
     display: flex;
     gap: 50px;
     font-family: Space Mono;
+}
+
+
+nav.navbar {
+    font-size: 20px;
 }
 
 a {
