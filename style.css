@@ -4,7 +4,7 @@ Author: Afaf
 Description: Projet Openclassroom
 */
 
-img {
+.logo {
     width: 300px;
 }
 
@@ -146,10 +146,22 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner {
 
 
 img.photo-image {
-    height: 560px;
+    height: 600px;
 }
 
 .image {
     display: flex;
     justify-content: flex-end;
+}
+
+.photos-item {
+    font-family: space mono;
+}
+
+h1 {
+    font-size: 46px;
+}
+
+.photos-content {
+    font-size: 20px;
 }

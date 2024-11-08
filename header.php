@@ -7,8 +7,8 @@
 </head>
 
 <header>
-<div class="logo">
-        <a href="#"><img src="http://nathalie-mota1.local/wp-content/uploads/2024/10/Nathalie-Mota.png" alt="Logo" /></a>
+<div>
+        <a href="#"><img class="logo" src="http://nathalie-mota1.local/wp-content/uploads/2024/10/Nathalie-Mota.png" alt="Logo" /></a>
     </div>
 
 

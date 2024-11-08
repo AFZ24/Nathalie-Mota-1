@@ -1,3 +1,4 @@
+<div class="container">
 <?php
 get_header(); // Inclus l'en-tête de votre site
 
@@ -36,6 +37,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                 <?php the_content(); ?>
             </div>
         </div>
+    </div>
 
     <?php else : // Pour les autres types de publication ?>
 
