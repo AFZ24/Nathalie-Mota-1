@@ -5,8 +5,8 @@ get_header(); // Inclus l'en-tête de votre site
 if (have_posts()) : while (have_posts()) : the_post();
 
     if (get_post_type() == 'photos') : ?>
-        
-        <!-- Affiche l'image de la photo avant le titre -->
+       <div class="photo-texte"> 
+        <!-- Affiche l'image de la photo -->
        <?php if (get_field('photo')) : ?>
             <div class="image">
                 <img class="photo-image" src="<?php echo esc_url(get_field('photo')); ?>" alt="<?php the_title(); ?>">
@@ -38,7 +38,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
         </div>
     </div>
-
+                </div>
     <?php else : // Pour les autres types de publication ?>
 
         <div class="post-item">

@@ -156,6 +156,10 @@ img.photo-image {
 
 .photos-item {
     font-family: space mono;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
 }
 
 h1 {
@@ -164,4 +168,10 @@ h1 {
 
 .photos-content {
     font-size: 20px;
+}
+
+.photo-texte {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
 }
