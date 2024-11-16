@@ -10,7 +10,8 @@ get_header();
 <div class="container">
 
  <!-- Formulaire des filtres -->
- <form><div id="photo-filters">
+<form id="photo-filters">
+    <div class="filtres">
         <select name="categorie" id="categorie">
             <option value="">CATEGORIES</option>
             <?php
@@ -29,15 +30,18 @@ get_header();
                 echo "<option value='{$format->slug}'>{$format->name}</option>";
             }
             ?>
-        </select></div>
-<div class="date">
+        </select>
+    </div>
+
+    <div class="date">
         <select name="date" id="date">
-        <option>TRIER PAR</option>
+            <option value="desc">TRIER PAR</option>
             <option value="desc">Plus récentes</option>
             <option value="asc">Plus anciennes</option>
         </select>
     </div>
-    </form> </div>
+</form>
+
     <div class="container photos-accueil" id="photos">
     <?php
     // La requête pour récupérer les 8 dernières photos du CPT 'photos'
@@ -58,6 +62,7 @@ get_header();
     
     <div class="photo-accueil">
     <div class="image-accueil">
+    <a href="<?php the_permalink(); ?>">
         <img src="<?php echo esc_url(get_field('photo')); ?>" alt="<?php the_title(); ?>">
         <div class="overlay">
             <div class="photo-info">
@@ -76,6 +81,7 @@ get_header();
             <span class="icon eye-icon" data-info="<?php the_permalink(); ?>"><img class="oeil" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/oeil.png"> </span>
             <span class="icon fullscreen-icon" data-src="<?php echo esc_url(get_field('photo')); ?>"><img class="fullscreen" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/icon%20fullscreen.png"></span>
         </div>
+    </a>
     </div>
 </div>
 
@@ -90,12 +96,28 @@ get_header();
     wp_reset_postdata(); // Réinitialiser la requête après avoir affiché les photos
     ?>
     <!-- Bouton pour charger plus de photos -->
-    <button id="load-more">Charger plus</button>
+   <!-- Conteneur pour afficher les photos -->
+   <div id="photo-container">
+    <!-- Les photos seront chargées ici -->
+</div>
+<button id="load-more">Charger plus</button>
+
+
+</div>
+<!-- Lightbox HTML structure -->
+<div class="lightbox" style="display: none;">
+    <button class="lightbox__close">Fermer</button>
+    <button class="lightbox__next">Suivant</button>
+    <button class="lightbox__prev">Précédent</button>
+    <div class="lightbox__container">
+        <img src="" alt="Image en plein écran">
+    </div>
 </div>
 
-
+</div>
 </body>
-</div>
+
+
 <?php
 get_footer();
 ?>

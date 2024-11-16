@@ -1,10 +1,12 @@
 <!-- Footer content -->
+ 
 <div id="myModalOverlay"></div>
 <div id="myModal">
     <button id="closeModal" style="float: right;">&times;</button>
     <img class="contact-img" src="http://nathalie-mota1.local/wp-content/uploads/2024/11/Contact-header.png" alt="contact">
     <div class="formulaire"><?php echo do_shortcode('[contact-form-7 id="1c19cd6" title="Formulaire de contact 1"]'); ?></div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -34,6 +36,9 @@
         }
     });
 </script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/script.js"></script>
+
+
 <nav class="navbar footer-navbar" role="navigation" aria-label="<?php esc_html_e( 'Menu du footer', 'text-domain' ); ?>">
     <?php
     if (has_nav_menu('footer-menu')) {
@@ -49,3 +54,5 @@
     ?>
     <ul id="footer-menu"><p>TOUS DROITS RESERVES</p></ul>
 </nav>
+<?php wp_footer(); ?>
+</html>

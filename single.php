@@ -33,12 +33,20 @@ if (have_posts()) : while (have_posts()) : the_post();
 				<?php if (get_field('annee')) : ?>
                     <p><strong>Année :</strong> <?php echo esc_html(get_field('annee')); ?></p>
                 <?php endif; ?>
+                
+
                 <!-- Affiche le contenu de la publication -->
                 <?php the_content(); ?>
             </div>
         </div>
     </div>
+                <div class="contactpart">
+                <?php if (get_field('contact')) : ?>
+                <?php echo esc_html(get_field('contact')); ?><button class="contactbtn"><p>Contact</p></button>
+                <?php endif; ?>
                 </div>
+                </div>
+                
     <?php else : // Pour les autres types de publication ?>
 
         <div class="post-item">
