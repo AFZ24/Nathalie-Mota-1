@@ -1,5 +1,4 @@
 //code filtres 
-
 jQuery(document).ready(function($) {
     var page = 1; // Page initiale
     var categorie = ''; // Filtre de catégorie
@@ -41,7 +40,6 @@ jQuery(document).ready(function($) {
         categorie = $('#categorie').val();
         format = $('#format').val();
         date = $('#date').val();
-
         // Réinitialiser les photos au changement de filtre
         page = 1;
         $('#photo-container').empty(); // Vider le conteneur de photos
@@ -51,13 +49,11 @@ jQuery(document).ready(function($) {
     });
 
     // Fonction pour détecter lorsque l'utilisateur atteint le bas de la page
-    $(window).scroll(function() {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
-            page++; // Incrémenter la page
-            loadPhotos(page, categorie, format, date); // Charger les photos suivantes
-        }
+    
+    $('#load-more').on('click', function() {
+        page++; // Incrémenter la page
+        loadPhotos(page, categorie, format, date); // Charger les photos suivantes
     });
-
 });
 
 
@@ -129,47 +125,13 @@ jQuery(document).ready(function($) {
 
 
 
-//fonction en rapport avec le charger plus 
-jQuery(document).ready(function($) {
-    var page = 1; // Page initiale
-    var categorie = ''; // Filtre catégorie
-    var format = ''; // Filtre format
-    var date = 'desc'; // Tri par date
 
-    // Fonction pour charger les photos via AJAX
-    function loadPhotos(page, categorie, format, date) {
-        $.ajax({
-            url: ajax_object.ajaxurl, // URL d'admin AJAX
-            type: 'POST',
-            data: {
-                action: 'load_photos', // Action AJAX
-                filters: {
-                    page: page, // Numéro de la page
-                    categorie: categorie, // Filtre catégorie
-                    format: format, // Filtre format
-                    date: date // Tri par date
-                }
-            },
-            success: function(response) {
-                if (response) {
-                    // Ajouter les photos au conteneur
-                    $('#photo-container').append(response);
-                }
-            },
-            error: function(error) {
-                console.log('Erreur AJAX:', error);
-            }
-        });
-    }
 
     // Fonction pour détecter lorsque l'utilisateur clique sur le boutton charger plus
-    $('#load-more').on('click', function() {
-        page++; // Incrémenter la page
-        loadPhotos(page, categorie, format, date); // Charger plus de photos
+    jQuery(function($) {
+        
     });
     
+    
 
-    // Charger les premières photos
-    loadPhotos(page, categorie, format, date);
-});
 

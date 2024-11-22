@@ -118,5 +118,20 @@ function load_photos_ajax_handler() {
 add_action('wp_ajax_load_photos', 'load_photos_ajax_handler');
 add_action('wp_ajax_nopriv_load_photos', 'load_photos_ajax_handler');
 
+function afaf_enqueue_scripts() {
+    // Enregistrement et inclusion du script
+    wp_enqueue_script(
+        'custom-script', // Identifiant unique pour le script
+        get_template_directory_uri() . '/js/script.js', // Chemin vers le fichier
+        array('jquery'), // Dépendances (ajoute 'jquery' si nécessaire)
+        '1.0', // Version du script
+        true // Charger dans le footer (true) ou le header (false)
+    );
+    wp_localize_script( 'custom-script', 'ajax_object', array(
+        'ajaxurl' => admin_url( 'admin-ajax.php' ),
+    ));
+
+}
+add_action('wp_enqueue_scripts', 'afaf_enqueue_scripts');
 
 

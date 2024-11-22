@@ -42,7 +42,7 @@ get_header();
     </div>
 </form>
 
-    <div class="container photos-accueil" id="photos">
+    <div class="container photos-accueil" id="photo-container">
     <?php
     // La requête pour récupérer les 8 dernières photos du CPT 'photos'
     $args = array(
