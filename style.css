@@ -32,10 +32,12 @@ Description: Projet Openclassroom
     font-style: italic;
   }
   
-header {
+
+.menu-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 40px;
 }
 
 .container {
@@ -335,7 +337,7 @@ select#date {
 
 form#photo-filters{
     display: flex;
-    gap: 370px;
+    gap: 340px;
     margin-top: 170px;
     margin-bottom: 50px;
     flex-wrap: wrap;
@@ -347,8 +349,152 @@ form#photo-filters{
     gap: 30px;
 }
 
+@media screen and (max-width: 1348px) {
+    form#photo-filters {
+        display: flex;
+        gap: 35px;
+        margin-top: 170px;
+        margin-bottom: 50px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .filtres {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    ul#footer-menu {
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
+    nav.navbar.footer-navbar {
+        display: block;
+        }
+
+#burger-btn {
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #burger-btn .line {
+    width: 30px;
+    height: 4px;
+    background-color: black;
+  }
+
+  nav.navbar #primary-menu {
+    display: none !important;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 63px;
+    margin-bottom: 40px;
+}
+.menu-header {
+    margin-top: 0px;
+}
+
+}
+
+div#burger-menu .menuburger {
+    display: block;
+  }
+  
+  .menu-toggle {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    z-index: 1001;
+  }
+  
+  .menu-toggle .line {
+    width: 100%;
+    height: 4px;
+    background-color: black;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .burger-menu {
+    position: fixed;
+    width: 100%;
+    top: 106px;
+    height: 100%;
+    background-color: #ff0000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-170%);
+    z-index: 1000;
+    max-width: 1440px;
+    margin-left: -20px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.5s ease, opacity 1s ease-in-out, visibility 0.5s ease-in-out;
+  }
+  
+  #burger-menu ul#primary-menu {
+    display: flex;
+    flex-direction: column;
+} 
+  .burger-menu ul li {
+    margin: 20px 0;
+  }
+  
+  .burger-menu ul li a {
+    text-decoration: none;
+    font-size: 55px;
+    transition: color 0.3s;
+    color: white !important;
+  }
+  
+  .burger-menu ul li a:hover {
+    text-shadow: 0 0 10px rgba(255, 100, 48, 0.7), 0 0 20px rgba(255, 79, 31, 0.868), 0 0 30px rgba(248, 83, 0, 0.3);
+  }
+  .menu-active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .burger-open .line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .burger-open .line:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .burger-open .line:nth-child(3) {
+    transform: rotate(-45deg) translate(10px, -11px);
+  }
+  
+  body.menu-open {
+    overflow: hidden;
+  }
+
+
 #load-more {
-    margin: 30px;
+    margin: 40px;
     height: 60px;
     width: 300px;
     border: solid 2px gray;

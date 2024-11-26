@@ -132,6 +132,27 @@ jQuery(document).ready(function($) {
         
     });
     
+    // fonction pour le menu burger 
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const burgerBtn = document.getElementById('burger-btn');
+        const burgerMenu = document.getElementById('burger-menu');
+        const body = document.body;
     
+        burgerBtn.addEventListener('click', () => {
+            burgerMenu.classList.toggle('menu-active');
+            burgerBtn.classList.toggle('burger-open');
+            body.classList.toggle('menu-open');
+        });
+    
+        const menuLinks = burgerMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                burgerMenu.classList.remove('menu-active');
+                burgerBtn.classList.remove('burger-open');
+                body.classList.remove('menu-open');
+            });
+        });
+    });
 
 

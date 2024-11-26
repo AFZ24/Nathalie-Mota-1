@@ -83,6 +83,7 @@ get_header();
         </div>
     </a>
     </div>
+    
 </div>
 
 
@@ -95,12 +96,13 @@ get_header();
 
     wp_reset_postdata(); // Réinitialiser la requête après avoir affiché les photos
     ?>
+    <button id="load-more">Charger plus</button>
     <!-- Bouton pour charger plus de photos -->
    <!-- Conteneur pour afficher les photos -->
    <div id="photo-container">
     <!-- Les photos seront chargées ici -->
 </div>
-<button id="load-more">Charger plus</button>
+
 
 
 </div>

@@ -8,7 +8,8 @@
 <?php wp_head(); ?>
 </head>
 <header>
-<div>
+<div class="menu-header">
+    <div>
         <a href="#"><img class="logo" src="http://nathalie-mota1.local/wp-content/uploads/2024/10/Nathalie-Mota.png" alt="Logo" /></a>
     </div>
 
@@ -28,6 +29,29 @@
     }
     ?>
 </nav>
+</div>
+<button class="menu-toggle" id="burger-btn" aria-expanded="false">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+</button>
+
+<div id="burger-menu" class="burger-menu">
+            
+<?php
+    if (has_nav_menu('main-menu')) {
+        wp_nav_menu([
+            'theme_location' => 'main-menu',
+            'container'      => false,
+            'menu_id'        => 'primary-menu',
+            'menu_class'     => 'menu',
+        ]);
+    } else {
+        echo '<p>' . esc_html__('Aucun menu n\'est défini pour cet emplacement.', 'text-domain') . '</p>';
+    }
+    ?>
+</div>
+
 </header>
 
 
