@@ -52,26 +52,26 @@ add_action('init', 'create_custom_taxonomies');
 
 // Fonction pour charger les photos via AJAX
 function load_photos_ajax_handler() {
-    // Vérifier si les paramètres sont envoyés via AJAX
-    if (isset($_POST['filters'])) {
+    // Vérifier si les paramètres sont bien envoyés via AJAX
+    if (isset($_POST['filters']) && is_array($_POST['filters'])) {
         $filters = $_POST['filters'];
 
-        // Définir les arguments de la requête WP_Query
+        // Définir les arguments pour la requête WP_Query
         $args = array(
-            'post_type' => 'photos', // Assurez-vous que votre CPT est bien 'photos'
-            'posts_per_page' => 8,   // Nombre de photos par page
-            'paged' => $filters['page'], // La page de photos à charger
-            'orderby' => 'date',     // Trier par date
-            'order' => ($filters['date'] === 'asc' ? 'ASC' : 'DESC'), // Tri par date
-            'tax_query' => array('relation' => 'AND'),
+            'post_type'      => 'photos', // Nom de votre CPT
+            'posts_per_page' => 8,        // Nombre de photos par page
+            'paged'          => intval($filters['page']), // Numéro de la page
+            'orderby'        => 'date',  // Trier par date
+            'order'          => ($filters['date'] === 'asc' ? 'ASC' : 'DESC'), // Tri par date
+            'tax_query'      => array('relation' => 'AND'),
         );
 
         // Filtrer par catégorie
         if (!empty($filters['categorie'])) {
             $args['tax_query'][] = array(
                 'taxonomy' => 'categorie',
-                'field' => 'slug',
-                'terms' => $filters['categorie'],
+                'field'    => 'slug',
+                'terms'    => sanitize_text_field($filters['categorie']),
             );
         }
 
@@ -79,44 +79,46 @@ function load_photos_ajax_handler() {
         if (!empty($filters['format'])) {
             $args['tax_query'][] = array(
                 'taxonomy' => 'format',
-                'field' => 'slug',
-                'terms' => $filters['format'],
+                'field'    => 'slug',
+                'terms'    => sanitize_text_field($filters['format']),
             );
         }
 
-        // Requête WP_Query pour récupérer les photos
+        // Exécuter la requête WP_Query
         $photos_query = new WP_Query($args);
 
-        // Vérifier si des photos sont trouvées
-        if ($photos_query->have_posts()) :
-            while ($photos_query->have_posts()) : $photos_query->the_post();
+        // Générer le HTML pour chaque résultat
+        if ($photos_query->have_posts()) {
+            while ($photos_query->have_posts()) {
+                $photos_query->the_post();
                 ?>
-                <div class="photo-accueil-container">
-                    <div class="photo-accueil">
+                <div class="photo-item">
+                    <div class="photo-image">
                         <?php if (get_field('photo')) : ?>
-                            <div class="image-accueil">
-                                <img src="<?php echo esc_url(get_field('photo')); ?>" alt="<?php the_title(); ?>">
-                            </div>
+                            <img src="<?php echo esc_url(get_field('photo')); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
                         <?php endif; ?>
                     </div>
+                    <h3 class="photo-title"><?php the_title(); ?></h3>
                 </div>
                 <?php
-            endwhile;  // Assurez-vous que cette ligne est bien fermée
-        else :
-            echo '<p>Aucune photo à afficher.</p>';
-        endif;
+            }
+        } else {
+            // Aucun résultat trouvé
+            echo '';
+        }
 
-        // Réinitialiser la requête WP
+        // Réinitialiser les données de la requête WP
         wp_reset_postdata();
     }
 
-    // Terminer correctement l'exécution AJAX
+    // Terminer la requête AJAX
     wp_die();
 }
 
-// Ajouter les actions pour AJAX pour utilisateurs connectés et non connectés
+// Ajouter les actions AJAX
 add_action('wp_ajax_load_photos', 'load_photos_ajax_handler');
 add_action('wp_ajax_nopriv_load_photos', 'load_photos_ajax_handler');
+
 
 function afaf_enqueue_scripts() {
     // Enregistrement et inclusion du script

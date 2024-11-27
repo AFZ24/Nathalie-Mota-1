@@ -1,9 +1,8 @@
-//code filtres 
-jQuery(document).ready(function($) {
-    var page = 1; // Page initiale
-    var categorie = ''; // Filtre de catégorie
-    var format = ''; // Filtre de format
-    var date = 'desc'; // Tri par date
+jQuery(document).ready(function ($) {
+    let page = 1; // Page initiale
+    let categorie = ''; // Filtre catégorie (slug)
+    let format = ''; // Filtre format (slug)
+    let date = 'desc'; // Ordre par défaut
 
     // Fonction pour charger les photos via AJAX
     function loadPhotos(page, categorie, format, date) {
@@ -11,53 +10,40 @@ jQuery(document).ready(function($) {
             url: ajax_object.ajaxurl, // URL d'admin AJAX
             type: 'POST',
             data: {
-                action: 'load_photos', // Action AJAX
+                action: 'load_photos', // Nom de l'action AJAX côté PHP
                 filters: {
-                    page: page, // Numéro de la page
-                    categorie: categorie, // Filtre catégorie
-                    format: format, // Filtre format
-                    date: date // Tri par date
-                }
+                    page: page,
+                    categorie: categorie,
+                    format: format,
+                    date: date,
+                },
             },
-            success: function(response) {
-                if (response) {
-                    // Ajouter les photos au conteneur
+            beforeSend: function () {
+                $('#load-more').text('Chargement...'); // Changement du texte pendant le chargement
+            },
+            success: function (response) {
+                if (response.trim() !== '') {
+                    // Ajouter le contenu au conteneur
                     $('#photo-container').append(response);
+                    $('#load-more').text('Charger plus');
+                } else {
+                    // Masquer le bouton s'il n'y a plus de contenu
+                    $('#load-more').hide();
                 }
             },
-            error: function(error) {
-                console.log('Erreur AJAX:', error);
-            }
+            error: function (error) {
+                console.error('Erreur AJAX:', error);
+                $('#load-more').text('Charger plus');
+            },
         });
     }
 
-    // Charger les premières photos
-    loadPhotos(page, categorie, format, date);
-
-    // Écouteurs pour les changements dans les filtres
-    $('#photo-filters select').on('change', function() {
-        // Récupérer les valeurs des filtres
-        categorie = $('#categorie').val();
-        format = $('#format').val();
-        date = $('#date').val();
-        // Réinitialiser les photos au changement de filtre
-        page = 1;
-        $('#photo-container').empty(); // Vider le conteneur de photos
-
-        // Recharger les photos avec les nouveaux filtres
-        loadPhotos(page, categorie, format, date);
-    });
-
-    // Fonction pour détecter lorsque l'utilisateur atteint le bas de la page
-    
-    $('#load-more').on('click', function() {
-        page++; // Incrémenter la page
+    // Gestion du clic sur le bouton "Charger plus"
+    $('#load-more').on('click', function () {
+        page++; // Incrémenter le numéro de la page
         loadPhotos(page, categorie, format, date); // Charger les photos suivantes
     });
 });
-
-
-
 
 
 //code lightbox

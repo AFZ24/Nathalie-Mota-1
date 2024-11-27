@@ -304,7 +304,7 @@ h1 {
 }
 
 
-  .photos-accueil {
+.photos-accueil {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
@@ -365,7 +365,7 @@ form#photo-filters{
         justify-content: center;
     }
   }
-  @media screen and (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
     ul#footer-menu {
         flex-wrap: wrap;
         flex-direction: column;
@@ -406,13 +406,7 @@ form#photo-filters{
     margin-top: 0px;
 }
 
-}
-
-div#burger-menu .menuburger {
-    display: block;
-  }
-  
-  .menu-toggle {
+.menu-toggle {
     width: 30px;
     height: 30px;
     display: flex;
@@ -430,6 +424,12 @@ div#burger-menu .menuburger {
     height: 4px;
     background-color: black;
     transition: all 0.3s ease-in-out;
+  }
+
+}
+
+div#burger-menu .menuburger {
+    display: block;
   }
   
   .burger-menu {
@@ -467,9 +467,6 @@ div#burger-menu .menuburger {
     color: white !important;
   }
   
-  .burger-menu ul li a:hover {
-    text-shadow: 0 0 10px rgba(255, 100, 48, 0.7), 0 0 20px rgba(255, 79, 31, 0.868), 0 0 30px rgba(248, 83, 0, 0.3);
-  }
   .menu-active {
     transform: translateY(0);
     opacity: 1;
