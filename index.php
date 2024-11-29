@@ -10,7 +10,7 @@ get_header();
 <div class="container">
 
  <!-- Formulaire des filtres -->
-<form id="photo-filters">
+<form id="photo-filters" data-nonce="<?php echo wp_create_nonce('filter_nonce'); ?>">
     <div class="filtres">
         <select name="categorie" id="categorie">
             <option value="">CATEGORIES</option>
@@ -78,8 +78,8 @@ get_header();
                     <?php the_title(); // Affiche le titre de la photo ?>
                 </p>
             </div>
-            <span class="icon eye-icon" data-info="<?php the_permalink(); ?>"><img class="oeil" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/oeil.png"> </span>
-            <span class="icon fullscreen-icon" data-src="<?php echo esc_url(get_field('photo')); ?>"><img class="fullscreen" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/icon%20fullscreen.png"></span>
+            <span class="eye-icon" data-info="<?php the_permalink(); ?>"><img class="oeil" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/oeil.png"> </span>
+            <span class="fullscreen-icon" data-src="<?php echo esc_url(get_field('photo')); ?>"><img class="fullscreen" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/icon%20fullscreen.png"></span>
         </div>
     </a>
     </div>
@@ -118,7 +118,7 @@ get_header();
 </div>
 </div>
 
-<button id="load-more">Charger plus</button>
+<div class="load-more"><button id="load-more">Charger plus</button></div>
 
 </body>
 

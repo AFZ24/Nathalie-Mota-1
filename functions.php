@@ -52,87 +52,99 @@ add_action('init', 'create_custom_taxonomies');
 
 // Fonction pour charger les photos via AJAX
 function load_photos_ajax_handler() {
-    // Vérifier si les paramètres sont bien envoyés via AJAX
-    if (isset($_POST['filters']) && is_array($_POST['filters'])) {
-        $filters = $_POST['filters'];
+    check_ajax_referer('filter_nonce', 'nonce'); // Vérifie la nonciété pour la sécurité
 
-        // Définir les arguments pour la requête WP_Query
-        $args = array(
-            'post_type'      => 'photos', // Nom de votre CPT
-            'posts_per_page' => 8,        // Nombre de photos par page
-            'paged'          => intval($filters['page']), // Numéro de la page
-            'orderby'        => 'date',  // Trier par date
-            'order'          => ($filters['date'] === 'asc' ? 'ASC' : 'DESC'), // Tri par date
-            'tax_query'      => array('relation' => 'AND'),
-        );
+    $filters = isset($_POST['filters']) ? $_POST['filters'] : [];
+    $paged = isset($filters['page']) ? intval($filters['page']) : 1;
 
-        // Filtrer par catégorie
-        if (!empty($filters['categorie'])) {
-            $args['tax_query'][] = array(
-                'taxonomy' => 'categorie',
-                'field'    => 'slug',
-                'terms'    => sanitize_text_field($filters['categorie']),
-            );
-        }
+    $args = [
+        'post_type'      => 'photos',
+        'posts_per_page' => 8,
+        'paged'          => $paged,
+        'orderby'        => 'date',
+        'order'          => isset($filters['date']) && $filters['date'] === 'asc' ? 'ASC' : 'DESC',
+        'tax_query'      => [],
+    ];
 
-        // Filtrer par format
-        if (!empty($filters['format'])) {
-            $args['tax_query'][] = array(
-                'taxonomy' => 'format',
-                'field'    => 'slug',
-                'terms'    => sanitize_text_field($filters['format']),
-            );
-        }
+    // Filtrer par catégorie
+    if (!empty($filters['categorie'])) {
+        $args['tax_query'][] = [
+            'taxonomy' => 'categorie',
+            'field'    => 'slug',
+            'terms'    => sanitize_text_field($filters['categorie']),
+        ];
+    }
 
-        // Exécuter la requête WP_Query
-        $photos_query = new WP_Query($args);
+    // Filtrer par format
+    if (!empty($filters['format'])) {
+        $args['tax_query'][] = [
+            'taxonomy' => 'format',
+            'field'    => 'slug',
+            'terms'    => sanitize_text_field($filters['format']),
+        ];
+    }
 
-        // Générer le HTML pour chaque résultat
-        if ($photos_query->have_posts()) {
-            while ($photos_query->have_posts()) {
-                $photos_query->the_post();
-                ?>
-                <div class="photo-item">
-                    <div class="photo-image">
-                        <?php if (get_field('photo')) : ?>
-                            <img src="<?php echo esc_url(get_field('photo')); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
-                        <?php endif; ?>
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            ?>
+                <div class="photo-accueil">
+    <div class="image-accueil">
+    <a href="<?php the_permalink(); ?>">
+        <img src="<?php echo esc_url(get_field('photo')); ?>" alt="<?php the_title(); ?>">
+        <div class="overlay">
+            <div class="photo-info">
+                <p class="categorie">
+                    <?php
+                    $categories = get_the_terms(get_the_ID(), 'categorie');
+                    if (!empty($categories)) {
+                        echo esc_html($categories[0]->name); // Affiche le nom de la première catégorie
+                    }
+                    ?>
+                </p>
+                <p class="titre">
+                    <?php the_title(); // Affiche le titre de la photo ?>
+                </p>
+            </div>
+            <span class="eye-icon" data-info="<?php the_permalink(); ?>"><img class="oeil" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/oeil.png"> </span>
+            <span class="fullscreen-icon" data-src="<?php echo esc_url(get_field('photo')); ?>"><img class="fullscreen" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/icon%20fullscreen.png"></span>
+        </div>
+    </a>
+    </div>
+    
+</div>
+                        
                     </div>
-                    <h3 class="photo-title"><?php the_title(); ?></h3>
                 </div>
                 <?php
             }
         } else {
-            // Aucun résultat trouvé
-            echo '';
+            echo '<p>Aucune photo trouvée.</p>';
         }
 
-        // Réinitialiser les données de la requête WP
         wp_reset_postdata();
+        wp_die();
     }
-
-    // Terminer la requête AJAX
-    wp_die();
-}
-
-// Ajouter les actions AJAX
-add_action('wp_ajax_load_photos', 'load_photos_ajax_handler');
-add_action('wp_ajax_nopriv_load_photos', 'load_photos_ajax_handler');
+    add_action('wp_ajax_load_photos', 'load_photos_ajax_handler');
+    add_action('wp_ajax_nopriv_load_photos', 'load_photos_ajax_handler');
 
 
+// Enqueue des scripts
 function afaf_enqueue_scripts() {
-    // Enregistrement et inclusion du script
     wp_enqueue_script(
-        'custom-script', // Identifiant unique pour le script
-        get_template_directory_uri() . '/js/script.js', // Chemin vers le fichier
-        array('jquery'), // Dépendances (ajoute 'jquery' si nécessaire)
-        '1.0', // Version du script
-        true // Charger dans le footer (true) ou le header (false)
+        'custom-script',
+        get_template_directory_uri() . '/js/script.js',
+        ['jquery'],
+        null,
+        true
     );
-    wp_localize_script( 'custom-script', 'ajax_object', array(
-        'ajaxurl' => admin_url( 'admin-ajax.php' ),
-    ));
 
+    wp_localize_script('custom-script', 'ajax_object', [
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'nonce'   => wp_create_nonce('filter_nonce'),
+    ]);
 }
 add_action('wp_enqueue_scripts', 'afaf_enqueue_scripts');
 

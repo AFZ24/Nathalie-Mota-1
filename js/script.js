@@ -110,13 +110,6 @@ jQuery(document).ready(function($) {
 });
 
 
-
-
-
-    // Fonction pour détecter lorsque l'utilisateur clique sur le boutton charger plus
-    jQuery(function($) {
-        
-    });
     
     // fonction pour le menu burger 
 
@@ -140,5 +133,76 @@ jQuery(document).ready(function($) {
             });
         });
     });
+
+
+// js des filtres 
+jQuery(document).ready(function ($) {
+    const filterForm = $('#photo-filters');
+    const photoContainer = $('#photo-container');
+    const loadMoreButton = $('#load-more');
+    let currentPage = 1;
+
+    function loadPhotos(filters) {
+        $.ajax({
+            url: ajax_object.ajaxurl,
+            type: 'POST',
+            data: {
+                action: 'load_photos',
+                nonce: ajax_object.nonce,
+                filters: filters,
+            },
+            beforeSend: function () {
+                photoContainer.append('<div class="loading">Chargement...</div>');
+            },
+            success: function (response) {
+                photoContainer.html(response);
+                $('.loading').remove();
+            },
+            error: function () {
+                alert('Erreur lors du chargement des photos.');
+            },
+        });
+    }
+
+    // Filtrage des photos au changement des filtres
+    filterForm.on('change', 'select', function () {
+        const filters = {
+            categorie: filterForm.find('select[name="categorie"]').val(),
+            format: filterForm.find('select[name="format"]').val(),
+            date: filterForm.find('select[name="date"]').val(),
+            page: 1,
+        };
+
+        currentPage = 1; // Réinitialiser à la page 1
+        loadPhotos(filters);
+    });
+
+    // Gestion du bouton "Charger plus"
+    loadMoreButton.on('click', function () {
+        currentPage++;
+        const filters = {
+            categorie: filterForm.find('select[name="categorie"]').val(),
+            format: filterForm.find('select[name="format"]').val(),
+            date: filterForm.find('select[name="date"]').val(),
+            page: currentPage,
+        };
+
+        $.ajax({
+            url: ajax_object.ajaxurl,
+            type: 'POST',
+            data: {
+                action: 'load_photos',
+                nonce: ajax_object.nonce,
+                filters: filters,
+            },
+            success: function (response) {
+                photoContainer.append(response);
+            },
+            error: function () {
+                alert('Erreur lors du chargement.');
+            },
+        });
+    });
+});
 
 

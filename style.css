@@ -148,9 +148,8 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner {
 
 
 img.photo-image {
-    height: 600px;
+    height: 525px;
 }
-
 .image {
     display: flex;
     justify-content: flex-end;
@@ -168,14 +167,36 @@ h1 {
     font-size: 46px;
 }
 
+h2 {
+    font-family: space mono;
+    font-weight: 200;
+}
+
+.you-may-like {
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
+}
+
 .photos-content {
-    font-size: 20px;
+    font-size: 23px;
 }
 
 .photo-texte {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1200px) {
+.photo-texte {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
 }
 
 .photo-accueil {
@@ -218,18 +239,19 @@ h1 {
     align-items: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.6);
-    opacity: 0;
     transition: opacity 0.3s;
     color: white;
+    opacity: 0;
     text-align: center;
+    flex-wrap: wrap;
 }
 
 .photo-info {
     margin-bottom: 20px;
     display: flex;
-    gap: 310px;
+    gap: 240px;
     flex-direction: row-reverse;
-    position: relative;
+    position: sticky;
     top: 280px;
 }
 .categorie,
@@ -248,8 +270,18 @@ h1 {
     color: white;
     margin: 0 10px;
     cursor: pointer;
+    display: flex
+;
+    position: sticky;
+    flex-wrap: wrap;
 }
 
+.you-may-like-content {
+    display: flex;
+    gap: 22px;
+    height: 631px;
+    width: 1536px;
+}
 
   
 .lightbox {
@@ -287,7 +319,7 @@ h1 {
 }
 
 .lightbox__close {
-    top: 20px;
+    top: 70px;
     right: 20px;
 }
 
@@ -302,6 +334,14 @@ h1 {
     left: 20px;
     transform: translateY(-50%);
 }
+
+
+/* Style spécifique pour les images au format portrait */
+.portrait-image {
+    height: 900px; /* Fixe la hauteur à 900px */ /* Ajuste automatiquement la largeur */
+}
+
+
 
 
 .photos-accueil {
@@ -425,12 +465,33 @@ form#photo-filters{
     background-color: black;
     transition: all 0.3s ease-in-out;
   }
-
-}
-
 div#burger-menu .menuburger {
     display: block;
   }
+
+}
+
+
+
+@media screen and (max-width: 1280px) {
+   .photo-info {
+    display: flex;
+    gap: 47px;
+    flex-direction: row-reverse;
+    position: sticky;
+    top: 280px;
+    
+} 
+}
+
+span.fullscreen-icon {
+    display: flex;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+
   
   .burger-menu {
     position: fixed;
@@ -497,6 +558,15 @@ div#burger-menu .menuburger {
     border: solid 2px gray;
     border-radius: 5px;
     font-family: space mono;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.load-more {
+    display: flex;
+    justify-content: center;
 }
 
 img.oeil {
@@ -506,25 +576,62 @@ img.oeil {
 
 img.fullscreen {
     height: 40px;
-    display: flex;
-    position: relative;
-    bottom: 280px;
-    left: 280px;
+    display: flex
+;
+    position: sticky;
 }
 
 .contactpart {
     border-top: solid 2px;
     border-bottom: solid 2px;
-    margin-bottom: 190px;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    margin-bottom: 100px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     display: flex;
-    justify-content: flex-start;
-    gap: 100px;
+    justify-content: space-between;
     align-items: center;
+}
+
+.contactpart img {
+    display: flex;
+    justify-content: flex-end;
 }
 
 button.contactbtn {
     height: 70px;
-    width: 290px;
+    width: 400px;
+    position: relative;
+    right: 200px;
 }
+
+.photo-navigation {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    bottom: 5px;
+}
+
+.miniature-next {
+    width: 150px;
+    height: auto;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.arrows-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.arrow {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    position: relative;
+    display: inline-block;
+}
+
+
