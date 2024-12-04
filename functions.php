@@ -92,28 +92,36 @@ function load_photos_ajax_handler() {
             ?>
                 <div class="photo-accueil">
     <div class="image-accueil">
-    <a href="<?php the_permalink(); ?>">
-        <img src="<?php echo esc_url(get_field('photo')); ?>" alt="<?php the_title(); ?>">
-        <div class="overlay">
-            <div class="photo-info">
-                <p class="categorie">
-                    <?php
-                    $categories = get_the_terms(get_the_ID(), 'categorie');
-                    if (!empty($categories)) {
-                        echo esc_html($categories[0]->name); // Affiche le nom de la première catégorie
-                    }
-                    ?>
-                </p>
-                <p class="titre">
-                    <?php the_title(); // Affiche le titre de la photo ?>
-                </p>
+        <a href="<?php the_permalink(); ?>">
+            <img src="<?php echo esc_url(get_field('photo')); ?>" alt="<?php the_title(); ?>">
+            <div class="overlay">
+                <div class="photo-info">
+                    <p class="categorie">
+                        <?php
+                        $categories = get_the_terms(get_the_ID(), 'categorie');
+                        if (!empty($categories)) {
+                            echo esc_html($categories[0]->name); // Affiche le nom de la première catégorie
+                        }
+                        ?>
+                    </p>
+                    <p class="titre">
+                        <?php the_title(); // Affiche le titre de la photo ?>
+                    </p>
+                </div>
+                <span class="eye-icon" data-info="<?php the_permalink(); ?>"><img class="oeil" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/oeil.png"> </span>
+                <span class="fullscreen-icon" data-src="<?php echo esc_url(get_field('photo')); ?>" 
+                      data-title="<?php the_title(); ?>" 
+                      data-category="<?php
+                        $categories = get_the_terms(get_the_ID(), 'categorie');
+                        if (!empty($categories)) {
+                            echo esc_html($categories[0]->name);
+                        }
+                    ?>">
+                    <img class="fullscreen" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/icon%20fullscreen.png">
+                </span>
             </div>
-            <span class="eye-icon" data-info="<?php the_permalink(); ?>"><img class="oeil" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/oeil.png"> </span>
-            <span class="fullscreen-icon" data-src="<?php echo esc_url(get_field('photo')); ?>"><img class="fullscreen" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/icon%20fullscreen.png"></span>
-        </div>
-    </a>
+        </a>
     </div>
-    
 </div>
                         
                     </div>

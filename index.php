@@ -62,29 +62,38 @@ get_header();
     
     <div class="photo-accueil">
     <div class="image-accueil">
-    <a href="<?php the_permalink(); ?>">
-        <img src="<?php echo esc_url(get_field('photo')); ?>" alt="<?php the_title(); ?>">
-        <div class="overlay">
-            <div class="photo-info">
-                <p class="categorie">
-                    <?php
-                    $categories = get_the_terms(get_the_ID(), 'categorie');
-                    if (!empty($categories)) {
-                        echo esc_html($categories[0]->name); // Affiche le nom de la première catégorie
-                    }
-                    ?>
-                </p>
-                <p class="titre">
-                    <?php the_title(); // Affiche le titre de la photo ?>
-                </p>
+        <a href="<?php the_permalink(); ?>">
+            <img src="<?php echo esc_url(get_field('photo')); ?>" alt="<?php the_title(); ?>">
+            <div class="overlay">
+                <div class="photo-info">
+                    <p class="categorie">
+                        <?php
+                        $categories = get_the_terms(get_the_ID(), 'categorie');
+                        if (!empty($categories)) {
+                            echo esc_html($categories[0]->name); // Affiche le nom de la première catégorie
+                        }
+                        ?>
+                    </p>
+                    <p class="titre">
+                        <?php the_title(); // Affiche le titre de la photo ?>
+                    </p>
+                </div>
+                <span class="eye-icon" data-info="<?php the_permalink(); ?>"><img class="oeil" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/oeil.png"> </span>
+                <span class="fullscreen-icon" data-src="<?php echo esc_url(get_field('photo')); ?>" 
+                      data-title="<?php the_title(); ?>" 
+                      data-category="<?php
+                        $categories = get_the_terms(get_the_ID(), 'categorie');
+                        if (!empty($categories)) {
+                            echo esc_html($categories[0]->name);
+                        }
+                    ?>">
+                    <img class="fullscreen" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/icon%20fullscreen.png">
+                </span>
             </div>
-            <span class="eye-icon" data-info="<?php the_permalink(); ?>"><img class="oeil" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/oeil.png"> </span>
-            <span class="fullscreen-icon" data-src="<?php echo esc_url(get_field('photo')); ?>"><img class="fullscreen" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/icon%20fullscreen.png"></span>
-        </div>
-    </a>
+        </a>
     </div>
-    
 </div>
+
 
 
     <?php
@@ -109,17 +118,22 @@ get_header();
 </div>
 <!-- Lightbox HTML structure -->
 <div class="lightbox" style="display: none;">
-    <button class="lightbox__close">Fermer</button>
-    <button class="lightbox__next">Suivant</button>
-    <button class="lightbox__prev">Précédent</button>
+    <button class="lightbox__close"> <img class="close" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/Nathalie%20Mota%20-%20Maquette%202.0%20(1)/Vector.png"> </button>
+    <button class="lightbox__next"> <img class="suiv" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/Nathalie%20Mota%20-%20Maquette%202.0%20(1)/Navigation%20arrows.png"> </button>
+    <button class="lightbox__prev"> <img class="prec" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/Nathalie%20Mota%20-%20Maquette%202.0%20(1)/Navigation%20arrows-1.png"> </button>
     <div class="lightbox__container">
         <img src="" alt="Image en plein écran">
+        <div class="photo-info lightbox-info">
+            <p class="categorie" id="lightbox-category"></p>
+            <p class="titre" id="lightbox-title"></p>
+        </div>
     </div>
 </div>
-</div>
+
 
 <div class="load-more"><button id="load-more">Charger plus</button></div>
 
+</div>
 </body>
 
 

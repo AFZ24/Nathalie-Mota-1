@@ -10,7 +10,7 @@
 <header>
 <div class="menu-header">
     <div>
-        <a href="#"><img class="logo" src="http://nathalie-mota1.local/wp-content/uploads/2024/10/Nathalie-Mota.png" alt="Logo" /></a>
+        <a href="http://nathalie-mota1.local/"><img class="logo" src="http://nathalie-mota1.local/wp-content/uploads/2024/10/Nathalie-Mota.png" alt="Logo" /></a>
     </div>
 
 

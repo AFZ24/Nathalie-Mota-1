@@ -45,10 +45,6 @@ jQuery(document).ready(function ($) {
     });
 });
 
-
-//code lightbox
-
-
 jQuery(document).ready(function($) {
     let currentImageIndex = 0;
     let images = [];
@@ -57,7 +53,14 @@ jQuery(document).ready(function($) {
     function showImage(index) {
         if (index >= 0 && index < images.length) {
             currentImageIndex = index;
+            // Met à jour l'image dans la lightbox
             $('.lightbox__container img').attr('src', images[currentImageIndex].src);
+
+            // Met à jour le titre et la catégorie dans la lightbox
+            $('#lightbox-title').text(images[currentImageIndex].title);
+            $('#lightbox-category').text(images[currentImageIndex].category);
+
+            // Affiche la lightbox
             $('.lightbox').fadeIn();
         }
     }
@@ -69,7 +72,11 @@ jQuery(document).ready(function($) {
 
         // Collecte toutes les images pour la navigation
         images = $('.photo-accueil .fullscreen-icon').map(function() {
-            return { src: $(this).data('src') };
+            return {
+                src: $(this).data('src'),
+                title: $(this).data('title'),
+                category: $(this).data('category')
+            };
         }).get();
 
         // Récupère l'index de l'image cliquée
@@ -108,6 +115,39 @@ jQuery(document).ready(function($) {
         }
     });
 });
+
+
+//code pour les filtres 
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdowns = document.querySelectorAll('.custom-dropdown');
+
+    dropdowns.forEach(dropdown => {
+        const selected = dropdown.querySelector('.selected-option');
+        const options = dropdown.querySelector('.dropdown-options');
+
+        // Afficher/masquer les options
+        selected.addEventListener('click', function () {
+            dropdown.classList.toggle('open');
+        });
+
+        // Mise à jour du texte sélectionné
+        options.addEventListener('click', function (e) {
+            if (e.target.tagName === 'LI') {
+                selected.textContent = e.target.textContent;
+                dropdown.classList.remove('open');
+            }
+        });
+
+        // Fermer le dropdown en cliquant ailleurs
+        document.addEventListener('click', function (e) {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('open');
+            }
+        });
+    });
+});
+
+
 
 
     

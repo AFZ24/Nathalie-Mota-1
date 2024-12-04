@@ -46,6 +46,8 @@ Description: Projet Openclassroom
     padding: 0 20px;
 }
 
+
+
 ul#primary-menu {
     list-style-type: none;
     display: flex;
@@ -177,6 +179,30 @@ h2 {
     display: flex;
     flex-direction: column;
     margin-bottom: 100px;
+    flex-wrap: wrap;
+}
+
+.you-may-like-content {
+    display: flex;
+    gap: 22px;
+    height: 631px;
+    width: 1536px;
+}
+@media screen and (max-width: 1500px) {
+    .you-may-like-content {
+        display: flex;
+        gap: 22px;
+        height: 631px;
+        width: auto;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .you-may-like h2 {
+        display: flex;
+        justify-content: center;
+    }
+        
 }
 
 .photos-content {
@@ -190,13 +216,33 @@ h2 {
     flex-wrap: wrap;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
 .photo-texte {
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: center;
     flex-wrap: wrap;
+    align-items: center;
 }
+
+}
+
+@media screen and (max-width: 1200px) {
+
+    .photo-navigation {
+        display: none;
+    }
+    
+    .contact-infos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 44px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        }
+        .contactpart {
+           justify-content: center !important;
+        }
 }
 
 .photo-accueil {
@@ -276,12 +322,7 @@ h2 {
     flex-wrap: wrap;
 }
 
-.you-may-like-content {
-    display: flex;
-    gap: 22px;
-    height: 631px;
-    width: 1536px;
-}
+
 
   
 .lightbox {
@@ -298,29 +339,47 @@ h2 {
 }
 
 .lightbox__container {
-    max-width: 45%;
-    max-height: 70%;
+    width: auto;
+    height: auto;
+    max-width: 90vw; /* Limite la largeur de la lightbox à 90% de la largeur de la fenêtre */
+    max-height: 90vh; /* Limite la hauteur de la lightbox à 90% de la hauteur de la fenêtre */
+    position: relative; /* Nécessaire pour le positionnement des boutons de navigation */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* Style pour l'image dans la lightbox */
 .lightbox__container img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+    max-width: 100%;
+    max-height: 90vh; /* Permet à l'image de s'ajuster à l'écran tout en gardant ses proportions */
+    object-fit: contain; /* L'image conserve ses proportions sans être coupée */
+    display: block; /* Pour s'assurer que l'image prend toute la largeur disponible */
+    margin: 0 auto; /* Centrer l'image horizontalement */
+}
+
+
+.photo-info.lightbox-info {
+    color: white;
+    gap: 283px !important;
+    justify-content: center;
 }
 
 .lightbox__close, .lightbox__next, .lightbox__prev {
     position: absolute;
-    background: #fff;
     border: none;
-    padding: 10px;
     cursor: pointer;
     font-size: 1em;
-    color: #333;
+    color: #ffffff;
+    background: no-repeat;
 }
 
 .lightbox__close {
-    top: 70px;
+    top: 0px;
     right: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 52px;
 }
 
 .lightbox__next {
@@ -388,6 +447,7 @@ form#photo-filters{
     display: flex;
     gap: 30px;
 }
+
 
 @media screen and (max-width: 1348px) {
     form#photo-filters {
@@ -585,11 +645,11 @@ img.fullscreen {
     border-top: solid 2px;
     border-bottom: solid 2px;
     margin-bottom: 100px;
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-bottom: 20px;
 }
 
 .contactpart img {
@@ -599,22 +659,22 @@ img.fullscreen {
 
 button.contactbtn {
     height: 70px;
-    width: 400px;
-    position: relative;
-    right: 200px;
+    width: 300px;
 }
 
-.photo-navigation {
+.contact-infos {
     display: flex;
-    flex-direction: column;
-    position: relative;
-    bottom: 5px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
 }
+
+
 
 .miniature-next {
     width: 150px;
     height: auto;
-    margin-top: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
@@ -633,5 +693,4 @@ button.contactbtn {
     position: relative;
     display: inline-block;
 }
-
 

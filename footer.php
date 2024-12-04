@@ -1,3 +1,5 @@
+<div class="foooter">
+
 <!-- Footer content -->
  
 <div id="myModalOverlay"></div>
@@ -11,31 +13,67 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const contactMenuItem = document.querySelector('.menu-item-116 a');
+        const contactBtn = document.querySelector('.contactbtn'); // Bouton avec la classe "contactbtn"
         const modal = document.getElementById('myModal');
         const overlay = document.getElementById('myModalOverlay');
         const closeModalBtn = document.getElementById('closeModal');
+        const photoRefInput = document.querySelector('input[name="your-subject"]'); // Champ "Réf. Photo"
 
-        if (contactMenuItem && modal && overlay && closeModalBtn) {
-            contactMenuItem.addEventListener('click', function(event) {
-                event.preventDefault();
+        // Fonction pour afficher la modale
+        const openModal = function(event) {
+            event.preventDefault();
+
+            // Récupère la référence de la photo depuis le bouton cliqué
+            if (this === contactBtn) {
+                const reference = this.getAttribute('data-reference');
+                if (photoRefInput && reference) {
+                    photoRefInput.value = reference; // Préremplit le champ avec la référence
+                }
+            }
+
+            // Affiche la modale et l'overlay
+            if (modal && overlay) {
                 modal.style.display = 'block';
                 overlay.style.display = 'block';
-            });
+            }
+        };
 
+        // Ouvrir la modale depuis le lien du menu
+        if (contactMenuItem) {
+            contactMenuItem.addEventListener('click', openModal);
+        }
+
+        // Ouvrir la modale depuis le bouton avec la classe "contactbtn"
+        if (contactBtn) {
+            contactBtn.addEventListener('click', openModal);
+        }
+
+        // Fermer la modale
+        if (closeModalBtn) {
             closeModalBtn.addEventListener('click', function() {
-                modal.style.display = 'none';
-                overlay.style.display = 'none';
+                if (modal && overlay) {
+                    modal.style.display = 'none';
+                    overlay.style.display = 'none';
+                }
             });
+        }
 
+        // Fermer la modale en cliquant sur l'overlay
+        if (overlay) {
             overlay.addEventListener('click', function() {
-                modal.style.display = 'none';
-                overlay.style.display = 'none';
+                if (modal && overlay) {
+                    modal.style.display = 'none';
+                    overlay.style.display = 'none';
+                }
             });
-        } else {
-            console.error("L'un des éléments n'a pas été trouvé");
         }
     });
 </script>
+
+
+
+
+
 
 
 
@@ -55,4 +93,5 @@
     <ul id="footer-menu"><p>TOUS DROITS RESERVES</p></ul>
 </nav>
 <?php wp_footer(); ?>
-</html>
+</div>
+</html> 
