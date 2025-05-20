@@ -13,6 +13,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const contactMenuItem = document.querySelector('.menu-item-116 a');
+        const contactMenuItem2 = document.querySelector('.burger-menu .menu-item-116 a');
         const contactBtn = document.querySelector('.contactbtn'); // Bouton avec la classe "contactbtn"
         const modal = document.getElementById('myModal');
         const overlay = document.getElementById('myModalOverlay');
@@ -43,6 +44,9 @@
             contactMenuItem.addEventListener('click', openModal);
         }
 
+        if (contactMenuItem2) {
+            contactMenuItem2.addEventListener('click', openModal);
+        }
         // Ouvrir la modale depuis le bouton avec la classe "contactbtn"
         if (contactBtn) {
             contactBtn.addEventListener('click', openModal);
