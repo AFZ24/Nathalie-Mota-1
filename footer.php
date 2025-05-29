@@ -43,7 +43,7 @@
         if (contactMenuItem) {
             contactMenuItem.addEventListener('click', openModal);
         }
-
+        // Ouvrir la modale depuis le lien du menu burger
         if (contactMenuItem2) {
             contactMenuItem2.addEventListener('click', openModal);
         }

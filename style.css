@@ -297,7 +297,7 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner {
     background: rgba(0, 0, 0, 0.5);
 }
 
-/*..................................................*/
+/*..............................................................*/
 
 /* PHOTOS ET IMAGES */
 img.photo-image {
@@ -561,8 +561,7 @@ img.oeil {
 
 img.fullscreen {
     height: 40px;
-    display: flex
-;
+    display: flex;
     position: sticky;
 }
 

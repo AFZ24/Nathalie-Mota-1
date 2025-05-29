@@ -106,16 +106,12 @@ get_header();
     wp_reset_postdata(); // Réinitialiser la requête après avoir affiché les photos
     ?>
     
-    <!-- Bouton pour charger plus de photos -->
    <!-- Conteneur pour afficher les photos -->
-   <div id="photo-container">
-    <!-- Les photos seront chargées ici -->
-     
-</div>
+    <div id="photo-container">
+    <!-- Les photos seront chargées ici --> 
+    </div>
+    </div>
 
-
-
-</div>
 <!-- Lightbox HTML structure -->
 <div class="lightbox" style="display: none;">
     <button class="lightbox__close"> <img class="close" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/Nathalie%20Mota%20-%20Maquette%202.0%20(1)/Vector.png"> </button>
@@ -131,8 +127,8 @@ get_header();
 </div>
 
 
+ <!-- Bouton pour charger plus de photos -->
 <div class="load-more"><button id="load-more">Charger plus</button></div>
-
 </div>
 </body>
 
