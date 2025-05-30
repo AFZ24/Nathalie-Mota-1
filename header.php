@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+
 <html>
 <head>
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/style.css">
@@ -8,7 +8,7 @@
 <?php wp_head(); ?>
 </head>
 <header>
-<div class="menu-header">
+<div class="menu-header container">
     <div>
         <a href="http://nathalie-mota1.local/"><img class="logo" src="http://nathalie-mota1.local/wp-content/uploads/2024/10/Nathalie-Mota.png" alt="Logo" /></a>
     </div>

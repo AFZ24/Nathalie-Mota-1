@@ -1,8 +1,8 @@
-<div class="container">
+<!DOCTYPE html> 
 <?php
 get_header();
 ?>
-</div>
+
 <body>
 <div> <img class="banniere" src="http://nathalie-mota1.local/wp-content/uploads/2024/10/Header-1.png" alt="image photographe event">
 </div>
@@ -78,7 +78,7 @@ get_header();
                         <?php the_title(); // Affiche le titre de la photo ?>
                     </p>
                 </div>
-                <span class="eye-icon" data-info="<?php the_permalink(); ?>"><img class="oeil" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/oeil.png"> </span>
+                <span class="eye-icon" data-info="<?php the_permalink(); ?>"><img class="oeil" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/oeil.png" alt="eye-icon"> </span>
                 <span class="fullscreen-icon" data-src="<?php echo esc_url(get_field('photo')); ?>" 
                       data-title="<?php the_title(); ?>" 
                       data-category="<?php
@@ -87,7 +87,7 @@ get_header();
                             echo esc_html($categories[0]->name);
                         }
                     ?>">
-                    <img class="fullscreen" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/icon%20fullscreen.png">
+                    <img class="fullscreen" src="/wp-content/themes/nathaliemota/Nathalie-Mota-1/icon%20fullscreen.png" alt="fullscreen-icon">
                 </span>
             </div>
         </a>
